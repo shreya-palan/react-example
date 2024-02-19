@@ -1,4 +1,3 @@
-// Home.js
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -7,6 +6,7 @@ import { FaEdit, FaTrash} from 'react-icons/fa';
 const Home = ({ taskList, clearAllTasks, editTask, deleteTask }) => {
   return (
     <div className='container mt-3 d-flex flex-column align-items-center'>
+      <h1 className='display-4 mb-4 font-weight-bolder'>TASK TRACKER</h1>
       <div className='mt-5'>
         <Link to="/task">
           <button type="button" className="btn btn-primary">Add Task</button>
