@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Task = () => {
+/*when new task ia added,it updates taskLit through updateTaskList prop and displayes it in the home component*/
+const Task = ({ updateTaskList }) => { 
 
   const [date, setDate] = useState(''); {/*date to store current date input*/}
   const [task, setTask] = useState(''); {/*task to store current task input*/}
@@ -22,7 +23,9 @@ const Task = () => {
 
     /*Checking if both date and task is entered*/
     if (date && task) {
-      setTaskList([...taskList, { date, task }]); /*yes: adds date and task to tasklist*/
+      const newTaskList = [...taskList, { date, task}];
+      setTaskList(newTaskList); /*yes: adds date and task to tasklist*/
+      updateTaskList(newTaskList);
       setDate('');
       setTask('');
     }
