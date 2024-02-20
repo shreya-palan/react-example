@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-/**/
 const Task = ({ updateTaskList }) => { 
 
   const [date, setDate] = useState(''); {/*date to store current date input*/}
@@ -17,6 +16,7 @@ const Task = ({ updateTaskList }) => {
     setTask(e.target.value);
   }
 
+  /*Called when form is submitted*/
   const handleSubmit = (e) => {
     e.preventDefault();
 

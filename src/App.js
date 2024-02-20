@@ -1,13 +1,13 @@
 import './App.css';
 import Home from './components/Home';
-import { BrowserRouter as Router, Route, Routes, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Task from './components/AddTask';
 
 function App() {
-  const [taskList, setTaskList] = useState(() => {
-    const storedTaskList = localStorage.getItem('taskList');
-    return storedTaskList ? JSON.parse(storedTaskList) : [];
+  const [taskList, setTaskList] = useState(() => { {/*initial value of taskList depends on the value returned by the function*/}
+    const storedTaskList = localStorage.getItem('taskList'); /*retreives value associated with taskaList key from the browser's local storage*/
+    return storedTaskList ? JSON.parse(storedTaskList) : []; /*if there is taskList then JSON string is converted into JS object,if not it is set to an empty array*/
   });
 
   const updateTaskList = (newTask) => {
@@ -17,12 +17,12 @@ function App() {
   };
 
   const clearAllTasks = () => {
-    setTaskList([]);
-    localStorage.removeItem('taskList');
+    setTaskList([]); /*seTaskList is a func used to update the taskList by setting it to empty array all the items are removed */
+    localStorage.removeItem('taskList'); /*removes all the item from the browser's local storage*/
   };
 
   const editTask = (index) => {
-    const taskToEdit = taskList[index];
+    const taskToEdit = taskList[index]; /*retrieves task to be editted based on the index*/
 
     // Display a prompt for editing the task directly
     const editedDate = prompt('Edit Date:', taskToEdit.date);
