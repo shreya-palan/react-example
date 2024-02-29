@@ -12,6 +12,14 @@ const Home = ({ taskList, clearAllTasks, editTask, deleteTask }) => {
     task.date.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  /*Prompting whether we want to delete the item or not */
+  const confirmDelete = (index) => {
+    const userConfirmation = window.confirm('Are you sure you want to delete this task?');
+    if(userConfirmation){
+      deleteTask(index);
+    }
+  }
+
   return (
     <div className='container mt-3 d-flex flex-column align-items-center'>
       <h1 className='display-4 mb-4 font-weight-bolder'>TASK TRACKER</h1>
@@ -19,7 +27,8 @@ const Home = ({ taskList, clearAllTasks, editTask, deleteTask }) => {
         <Link to="/task">
           <button type="button" className="btn btn-primary">Add Task</button>
         </Link>
-        <button type="button" className="btn btn-danger ms-2" onClick={clearAllTasks}>Clear All</button>
+        {taskList.length > 0 && (
+        <button type="button" className="btn btn-danger ms-2" onClick={clearAllTasks}>Clear All</button>)}
       </div>
       <div className="mt-3">
         <input type="text" placeholder='Search by name' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className='form-control'/>
@@ -43,7 +52,7 @@ const Home = ({ taskList, clearAllTasks, editTask, deleteTask }) => {
                     <span className="mx-2" style={{ cursor: 'pointer' }} onClick={() => editTask(index)}>
                       <i><FaEdit /></i>
                     </span>
-                    <span className="mx-2" style={{ cursor: 'pointer' }} onClick={() => deleteTask(index)}>
+                    <span className="mx-2" style={{ cursor: 'pointer' }} onClick={() => confirmDelete(index)}>
                       <i><FaTrash /></i>
                     </span>
                   </td>

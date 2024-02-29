@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Task = ({ updateTaskList }) => { 
 
+  const navigate = useNavigate();
   const [date, setDate] = useState(''); {/*date to store current date input*/}
   const [task, setTask] = useState(''); {/*task to store current task input*/}
   
+
   /*Update date when date changes*/
   const handleDateChange = (e) => {
     setDate(e.target.value);
@@ -21,16 +23,20 @@ const Task = ({ updateTaskList }) => {
     e.preventDefault();
 
     /*Checking if both date and task is entered*/
-    if (date && task) {
-      const newTask = { date, task};
+    if(!date && !task){
+      alert("Enter both date and task");
+    }else if(!date){
+      alert("Enter date");
+    }else if(!task){
+      alert("Enter task");
+    }else{
+      const newTask = {date, task};
       updateTaskList(newTask); /*updates the tasklist with the new task*/
       setDate('');
       setTask('');
+      navigate('/');
     }
-    else {
-      alert("Enter both date and task"); /*no: alert msg*/
-    }
-  };
+    };
 
   return (
     <div className="container mt-5 ">
@@ -47,9 +53,6 @@ const Task = ({ updateTaskList }) => {
           <input type="text" className="form-control" id="add" value={task} onChange={handleTaskeChange}/>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/" className='float-end'>
-          <button type="submit" className="btn btn-dark">Back</button>
-        </Link>
       </form>
     </div>
   )
